@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiabPredic - Évaluation du Risque de Diabète</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ cache_buster }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <h1>DiabPredic</h1>
+                </div>
+                <p class="subtitle">Évaluation intelligente du risque de diabète crée par Younes Benmansour</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Section À propos -->
+            <div class="about-container">
+                <div class="about-card">
+                    <div class="about-header">
+                        <h2><i class="fas fa-info-circle"></i> À propos de DiabPredic</h2>
+                    </div>
+                    
+                    <div class="about-content">
+                        <div class="about-section">
+                            <h3><i class="fas fa-target"></i> Notre Mission</h3>
+                            <p>DiabPredic est un outil d'évaluation intelligent conçu pour estimer votre risque de développer un diabète de type 2. Notre objectif est de vous fournir une analyse préliminaire basée sur vos caractéristiques personnelles et vos facteurs de risque.</p>
+                        </div>
+                        
+                        <div class="about-section">
+                            <h3><i class="fas fa-brain"></i> Intelligence Artificielle</h3>
+                            <p>Notre système utilise des <strong>algorithmes d'apprentissage automatique (Machine Learning)</strong> entraînés sur de vastes datasets médicaux. Le modèle analyse simultanément :</p>
+                            <ul class="features-list">
+                                <li><i class="fas fa-check"></i> Vos données biométriques (âge, poids, tour de taille)</li>
+                                <li><i class="fas fa-check"></i> Votre style de vie (activité physique, alimentation)</li>
+                                <li><i class="fas fa-check"></i> Vos antécédents médicaux et familiaux</li>
+                                <li><i class="fas fa-check"></i> Vos symptômes actuels</li>
+                                <li><i class="fas fa-check"></i> Facteurs génétiques et ethniques</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="about-section">
+                            <h3><i class="fas fa-cogs"></i> Comment ça fonctionne</h3>
+                            <div class="process-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>Collecte de données</h4>
+                                        <p>Vous renseignez vos informations personnelles et médicales</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>Analyse IA</h4>
+                                        <p>L'algorithme traite vos données et les compare aux modèles appris</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>Résultat personnalisé</h4>
+                                        <p>Vous obtenez un pourcentage de risque et des recommandations</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="about-section">
+                            <h3><i class="fas fa-shield-alt"></i> Fiabilité et Précision</h3>
+                            <p>Notre modèle de Machine Learning a été entraîné sur des milliers de cas cliniques et utilise des techniques avancées comme :</p>
+                            <div class="tech-badges">
+                                <span class="badge">Random Forest</span>
+                                <span class="badge">Régression Logistique</span>
+                                <span class="badge">Validation Croisée</span>
+                                <span class="badge">Normalisation des Données</span>
+                            </div>
+                        </div>
+                        
+                        <div class="disclaimer-box">
+                            <div class="disclaimer-header">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Important - Avertissement Médical</strong>
+                            </div>
+                            <p>Ce test est un <strong>outil d'aide à la décision</strong> et ne remplace en aucun cas une consultation médicale. Les résultats sont indicatifs et basés sur des modèles statistiques. Pour un diagnostic définitif, consultez toujours un professionnel de santé.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-container">
+                <form id="diabetes-form" class="diabetes-form">
+                    <!-- Section Informations personnelles -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-user"></i> Informations personnelles</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">
+                                    <i class="fas fa-birthday-cake"></i>
+                                    Âge (années)
+                                </label>
+                                <input type="number" id="age" name="age" min="18" max="100" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="weight">
+                                    <i class="fas fa-weight"></i>
+                                    Poids (kg)
+                                </label>
+                                <input type="number" id="weight" name="weight" min="30" max="200" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="waist">
+                                    <i class="fas fa-ruler-horizontal"></i>
+                                    Tour de taille (cm)
+                                </label>
+                                <input type="number" id="waist" name="waist" min="50" max="220" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ethnicity">
+                                    <i class="fas fa-globe"></i>
+                                    Origine ethnique
+                                </label>
+                                <select id="ethnicity" name="ethnicity" required>
+                                    <option value="">Choisissez...</option>
+                                    <option value="european">Européenne</option>
+                                    <option value="african">Africaine</option>
+                                    <option value="asian">Asiatique</option>
+                                    <option value="middle_east">Moyen-Orient</option>
+                                    <option value="other">Autres</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section Style de vie -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-running"></i> Style de vie</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="activity">
+                                    <i class="fas fa-dumbbell"></i>
+                                    Activité physique
+                                </label>
+                                <select id="activity" name="activity" required>
+                                    <option value="">Choisissez...</option>
+                                    <option value="none">Pas d'activité</option>
+                                    <option value="low">1 à 2 fois/semaine</option>
+                                    <option value="moderate">3 à 4 fois/semaine</option>
+                                    <option value="high">Tous les jours</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="diet">
+                                    <i class="fas fa-utensils"></i>
+                                    Alimentation
+                                </label>
+                                <select id="diet" name="diet" required>
+                                    <option value="">Choisissez...</option>
+                                    <option value="unhealthy">Riche en sucres et graisses</option>
+                                    <option value="balanced">Équilibrée</option>
+                                    <option value="healthy">Faible en calories</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section Antécédents médicaux -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-notes-medical"></i> Antécédents médicaux</h2>
+                        
+                        <div class="form-row">
+                            <div class="checkbox-group">
+                                <label>
+                                    <i class="fas fa-users"></i>
+                                    Antécédents familiaux de diabète
+                                </label>
+                                <div class="radio-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="family_history" value="yes" required>
+                                        <span>Oui</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="family_history" value="no" required>
+                                        <span>Non</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="checkbox-group">
+                                <label>
+                                    <i class="fas fa-heart"></i>
+                                    Hypertension artérielle
+                                </label>
+                                <div class="radio-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="hypertension" value="yes" required>
+                                        <span>Oui</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="hypertension" value="no" required>
+                                        <span>Non</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <label>
+                                    <i class="fas fa-tint"></i>
+                                    Cholestérol élevé
+                                </label>
+                                <div class="radio-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="cholesterol" value="yes" required>
+                                        <span>Oui</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="cholesterol" value="no" required>
+                                        <span>Non</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="checkbox-group">
+                                <label>
+                                    <i class="fas fa-baby"></i>
+                                    Diabète gestationnel (si femme)
+                                </label>
+                                <div class="radio-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="gestational_diabetes" value="yes" required>
+                                        <span>Oui</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="gestational_diabetes" value="no" required>
+                                        <span>Non</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <label>
+                                    <i class="fas fa-venus"></i>
+                                    SOPK (si femme)
+                                </label>
+                                <div class="radio-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="pcos" value="yes" required>
+                                        <span>Oui</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="pcos" value="no" required>
+                                        <span>Non</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section Symptômes -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-stethoscope"></i> Symptômes actuels</h2>
+                        <p class="section-subtitle">Cochez tous les symptômes que vous ressentez actuellement :</p>
+                        
+                        <div class="symptoms-grid">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="symptoms" value="thirst">
+                                <span class="checkmark"></span>
+                                <i class="fas fa-tint"></i>
+                                Soif excessive
+                            </label>
+                            
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="symptoms" value="urination">
+                                <span class="checkmark"></span>
+                                <i class="fas fa-restroom"></i>
+                                Mictions fréquentes
+                            </label>
+                            
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="symptoms" value="fatigue">
+                                <span class="checkmark"></span>
+                                <i class="fas fa-bed"></i>
+                                Fatigue inexpliquée
+                            </label>
+                            
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="symptoms" value="vision">
+                                <span class="checkmark"></span>
+                                <i class="fas fa-eye"></i>
+                                Vision trouble
+                            </label>
+                            
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="symptoms" value="weight">
+                                <span class="checkmark"></span>
+                                <i class="fas fa-weight-hanging"></i>
+                                Perte/prise de poids inexpliquée
+                            </label>
+                            
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="symptoms" value="healing">
+                                <span class="checkmark"></span>
+                                <i class="fas fa-band-aid"></i>
+                                Guérison lente
+                            </label>
+                            
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="symptoms" value="tingling">
+                                <span class="checkmark"></span>
+                                <i class="fas fa-hand-paper"></i>
+                                Picotements dans les extrémités
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bouton de soumission -->
+                    <div class="submit-section">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-calculator"></i>
+                            Évaluer mon risque
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Section des résultats -->
+            <div id="results-container" class="results-container hidden">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h2>Résultat de l'évaluation</h2>
+                    </div>
+                    
+                    <div class="risk-display">
+                        <div class="risk-icon" id="risk-icon"></div>
+                        <div class="risk-info">
+                            <div class="risk-percentage" id="risk-percentage"></div>
+                            <div class="risk-text" id="risk-text"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-gauge">
+                        <div class="gauge-container">
+                            <div class="gauge-fill" id="gauge-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h3><i class="fas fa-lightbulb"></i> Recommandations personnalisées</h3>
+                        <ul id="recommendations-list"></ul>
+                    </div>
+                    
+                    <button onclick="resetForm()" class="reset-btn">
+                        <i class="fas fa-redo"></i>
+                        Nouvelle évaluation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading spinner -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Analyse en cours...</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('diabetes-form');
+    const loading = document.getElementById('loading');
+    const resultsContainer = document.getElementById('results-container');
+
+    // NOUVEAU : Ajouter le champ sexe au début du formulaire
+    addGenderField();
+    
+    // NOUVEAU : Gérer l'affichage conditionnel
+    handleConditionalFields();
+
+    // Animation d'entrée des éléments - VERSION CORRIGÉE
+    const formSections = document.querySelectorAll('.form-section');
+    formSections.forEach((section, index) => {
+        // Ajouter la classe animate-in pour déclencher l'animation
+        setTimeout(() => {
+            section.classList.add('animate-in');
+        }, index * 200);
+    });
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // NOUVEAU : Vérifier si les champs conditionnels sont correctement gérés
+        const gender = document.getElementById('gender').value;
+        if (gender === 'male') {
+            // S'assurer que les champs femme-seulement sont définis sur "no"
+            document.querySelector('input[name="gestational_diabetes"][value="no"]').checked = true;
+            document.querySelector('input[name="pcos"][value="no"]').checked = true;
+        }
+        
+        // Afficher le loading
+        loading.classList.remove('hidden');
+        resultsContainer.classList.add('hidden');
+        
+        // Collecter les données du formulaire
+        const formData = new FormData(form);
+        const data = {};
+        
+        // Données simples
+        for (let [key, value] of formData.entries()) {
+            if (key === 'symptoms') {
+                if (!data.symptoms) data.symptoms = [];
+                data.symptoms.push(value);
+            } else {
+                data[key] = value;
+            }
+        }
+        
+        // S'assurer que symptoms existe
+        if (!data.symptoms) data.symptoms = [];
+        
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(result.error || 'Erreur lors de la prédiction');
+            }
+            
+            // Masquer le loading
+            loading.classList.add('hidden');
+            
+            // Afficher les résultats
+            displayResults(result);
+            
+        } catch (error) {
+            loading.classList.add('hidden');
+            alert('Erreur: ' + error.message);
+        }
+    });
+});
+
+// NOUVELLE FONCTION : Ajouter le champ sexe
+function addGenderField() {
+    // Trouver la première section (informations personnelles)
+    const personalSection = document.querySelector('.form-section');
+    const lastRow = personalSection.querySelector('.form-row:last-of-type');
+    
+    // Créer un nouveau groupe pour le genre
+    const genderGroup = document.createElement('div');
+    genderGroup.className = 'form-group';
+    genderGroup.innerHTML = `
+        <label for="gender">
+            <i class="fas fa-venus-mars"></i>
+            Sexe
+        </label>
+        <select id="gender" name="gender" required>
+            <option value="">Choisissez...</option>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+        </select>
+    `;
+    
+    // Ajouter le champ genre à la dernière ligne
+    lastRow.appendChild(genderGroup);
+}
+
+// NOUVELLE FONCTION : Gérer l'affichage conditionnel
+function handleConditionalFields() {
+    // Attendre que le champ genre soit créé
+    setTimeout(() => {
+        const genderSelect = document.getElementById('gender');
+        const gestationalSection = document.querySelector('input[name="gestational_diabetes"]').closest('.checkbox-group');
+        const pcosSection = document.querySelector('input[name="pcos"]').closest('.checkbox-group');
+        
+        // Fonction pour masquer/afficher les sections
+        function toggleFemaleOnlyFields(isFemale) {
+            const sections = [gestationalSection, pcosSection];
+            
+            sections.forEach(section => {
+                if (isFemale) {
+                    section.style.display = 'block';
+                    section.style.opacity = '1';
+                    // Remettre required sur les champs
+                    const radioInputs = section.querySelectorAll('input[type="radio"]');
+                    radioInputs.forEach(input => input.setAttribute('required', 'required'));
+                } else {
+                    section.style.display = 'none';
+                    section.style.opacity = '0.3';
+                    // Enlever required et pré-sélectionner "non"
+                    const radioInputs = section.querySelectorAll('input[type="radio"]');
+                    radioInputs.forEach(input => {
+                        input.removeAttribute('required');
+                        if (input.value === 'no') {
+                            input.checked = true;
+                        } else {
+                            input.checked = false;
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Initialement masquer les champs
+        toggleFemaleOnlyFields(false);
+        
+        // Écouter les changements de genre
+        genderSelect.addEventListener('change', function() {
+            const isFemale = this.value === 'female';
+            toggleFemaleOnlyFields(isFemale);
+        });
+    }, 100);
+}
+
+function displayResults(result) {
+    const resultsContainer = document.getElementById('results-container');
+    const riskIcon = document.getElementById('risk-icon');
+    const riskPercentage = document.getElementById('risk-percentage');
+    const riskText = document.getElementById('risk-text');
+    const gaugeFill = document.getElementById('gauge-fill');
+    const recommendationsList = document.getElementById('recommendations-list');
+    
+    // Afficher l'icône et le texte du risque
+    riskIcon.innerHTML = result.risk_icon;
+    riskIcon.style.color = result.risk_color;
+    riskPercentage.textContent = result.risk_percentage + '%';
+    riskText.textContent = result.risk_text;
+    riskText.style.color = result.risk_color;
+    
+    // Animer la jauge
+    gaugeFill.style.width = '0%';
+    gaugeFill.style.backgroundColor = result.risk_color;
+    
+    setTimeout(() => {
+        gaugeFill.style.width = result.risk_percentage + '%';
+    }, 500);
+    
+    // Afficher les recommandations
+    recommendationsList.innerHTML = '';
+    result.recommendations.forEach((recommendation, index) => {
+        const li = document.createElement('li');
+        li.textContent = recommendation;
+        li.style.animationDelay = `${index * 0.1}s`;
+        li.classList.add('recommendation-item');
+        recommendationsList.appendChild(li);
+    });
+    
+    // Afficher le conteneur des résultats avec animation
+    resultsContainer.classList.remove('hidden');
+    resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('diabetes-form').reset();
+    document.getElementById('results-container').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // NOUVEAU : Réinitialiser l'affichage conditionnel
+    const gestationalSection = document.querySelector('input[name="gestational_diabetes"]').closest('.checkbox-group');
+    const pcosSection = document.querySelector('input[name="pcos"]').closest('.checkbox-group');
+    
+    // Masquer les champs femmes
+    [gestationalSection, pcosSection].forEach(section => {
+        section.style.display = 'none';
+        section.style.opacity = '0.3';
+    });
+}
+
+// Validation en temps réel
+document.querySelectorAll('input, select').forEach(field => {
+    field.addEventListener('blur', function() {
+        validateField(this);
+    });
+});
+
+function validateField(field) {
+    const isValid = field.checkValidity();
+    const formGroup = field.closest('.form-group') || field.closest('.checkbox-group');
+    
+    if (isValid) {
+        formGroup.classList.remove('error');
+        formGroup.classList.add('success');
+    } else {
+        formGroup.classList.remove('success');
+        formGroup.classList.add('error');
+    }
+}
+    </script>
+</body>
+</html>
